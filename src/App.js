@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+
 import './App.css';
 
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import CheckoutForm from './components/CheckoutForm';
+import { PayPalButton } from './components/PaypalPayment';
+
+
+const public_key = "pk_test_Pq2BDpPTNhfsFHllBvY2GV6700TYOgJ1cD";
+const secret_key = "sk_test_pggpOl1FECwCoLsgXDTQjtjF00An8mKwrj"
+const stripePromise = loadStripe(public_key);
+const id = 123;
+
 function App() {
+  const options = {
+    // passing the client secret obtained from the server
+    clientSecret: `${id}_secret_${secret_key}`,
+  }
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hello world</h1>
+      {/* <Elements stripe={stripePromise} >
+      <CheckoutForm />
+    </Elements> */}
+
+    <PayPalButton/>
     </div>
   );
 }
